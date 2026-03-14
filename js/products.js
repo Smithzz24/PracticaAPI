@@ -14,38 +14,15 @@ async function getAllProducts() {
     headers: headersList
   });
 
-  //conversion of response to text
-  // let data = await response.text();
-  // console.log(data);
 
   //conversion of response to json
   let products = await response.json();
   console.log(products);
 
-  //printing the result in p tag
-  // document.getElementById("Result").innerText=data;
   var container = document.getElementById("container");
   container.innerHTML = "";
   //loop to display products
   products.forEach(product => {
-
-    // //creation of table structure    
-    // var register=document.createElement("tr");
-    // var cellId=document.createElement("td");
-    // var cellTitle=document.createElement("td");
-    // var cellPrice=document.createElement("td");
-
-    // //display data in cells
-    // cellId.innerText=product.id;
-    // cellTitle.innerText=product.title;
-    // cellPrice.innerText=product.price;
-
-    // //structure to add elements
-    // register.appendChild(cellId);
-    // register.appendChild(cellTitle);
-    // register.appendChild(cellPrice);
-    // container.appendChild(register);
-    //separation of table loading
     tableLoad(product);
   });
 
@@ -126,7 +103,6 @@ function tableLoad(product) {
   var cellTitle = document.createElement("td");
   var cellPrice = document.createElement("td");
   var cellOptions = document.createElement("td");
-  var cellUpdate = document.createElement("td");
 
   //display data in cells
   cellId.innerText = product.id;
