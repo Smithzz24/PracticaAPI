@@ -1,27 +1,21 @@
 let urlProducts = "http://localhost:3000/products";
 
-//function to query all products
 async function getAllProducts() {
-  //request header
   let headersList = {
     "Accept": "*/*",
     "User-Agent": "Thunder Client (https://www.thunderclient.com)"
   }
-  let response = await fetch("http://localhost:3000/products", {
-    //request type
+  let response = await fetch(urlProducts, {
     method: "GET",
-    //add header
     headers: headersList
   });
 
 
-  //conversion of response to json
   let products = await response.json();
   console.log(products);
 
   var container = document.getElementById("container");
   container.innerHTML = "";
-  //loop to display products
   products.forEach(product => {
     tableLoad(product);
   });
@@ -66,10 +60,6 @@ async function getFindByPriceProduct() {
   input.value = "";
 }
 
-
-
-
-
 function registerProduct() {
   const title = document.getElementById("nameRegister").value;
   const price = document.getElementById("priceRegister").value;
@@ -84,8 +74,7 @@ function registerProduct() {
     .then(response => response.json())
     .then(data => {
       console.log("Product registered:", data);
-      getAllProducts(); // Refresh the list
-      // Close the modal
+      getAllProducts(); 
       const modal = bootstrap.Modal.getInstance(document.getElementById('RegisterModal'));
       modal.hide();
     })
@@ -93,25 +82,18 @@ function registerProduct() {
 }
 
 function tableLoad(product) {
-  //capture container
   var container = document.getElementById("container");
-
-
-  //creation of table structure    
   var register = document.createElement("tr");
   var cellId = document.createElement("td");
   var cellTitle = document.createElement("td");
   var cellPrice = document.createElement("td");
   var cellOptions = document.createElement("td");
-
-  //display data in cells
   cellId.innerText = product.id;
   cellTitle.innerText = product.title;
   cellPrice.innerText = product.price;
   cellOptions.innerHTML = "<button class='btn btn-danger' onclick='deleteProduct(event, \"" + product.id + "\")'>Delete</button> \
 <button class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#UpdateModal' onclick='loadUpdateData(\"" + product.id + "\")'>Update</button>";
 
-  //structure to add elements
   register.appendChild(cellId);
   register.appendChild(cellTitle);
   register.appendChild(cellPrice);
@@ -133,7 +115,6 @@ async function deleteProduct(event, id) {
 
 
 function loadUpdateData(id) {
-  // Fetch product data and populate the update form
   fetch(urlProducts + "/" + id)
     .then(response => response.json())
     .then(product => {
@@ -160,8 +141,7 @@ async function updateProduct(event) {
 
   if (response.ok) {
     console.log("Product updated successfully");
-    getAllProducts(); // Refresh the list
-    // Close the modal
+    getAllProducts(); 
     const modal = bootstrap.Modal.getInstance(document.getElementById('UpdateModal'));
     modal.hide();
   } else {
@@ -183,11 +163,9 @@ async function registerProduct() {
 
   if (response.ok) {
     console.log("Product registered successfully");
-    getAllProducts(); // Refresh the list
-    // Clear the inputs
+    getAllProducts(); 
     document.getElementById("nameRegister").value = "";
     document.getElementById("priceRegister").value = "";
-    // Close the modal
     const modal = bootstrap.Modal.getInstance(document.getElementById('RegisterModal'));
     modal.hide();
   } else {
