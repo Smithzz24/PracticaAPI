@@ -1,3 +1,5 @@
+let urlProducts = "http://localhost:3000/products";
+
 //function to query all products
 async function getAllProducts() {
   //request header
@@ -5,8 +7,6 @@ async function getAllProducts() {
     "Accept": "*/*",
     "User-Agent": "Thunder Client (https://www.thunderclient.com)"
   }
-  //request to server
-  //fetch("server endpoint"
   let response = await fetch("http://localhost:3000/products", {
     //request type
     method: "GET",
@@ -32,7 +32,7 @@ async function getAllProducts() {
 async function getFindByIdProduct() {
   var input = document.getElementById("idFilter");
   var id = input.value.trim();
-  let response = await fetch("http://localhost:3000/products/" + id);
+  let response = await fetch(urlProducts + "/" + id);
   let product = await response.json();
   var container = document.getElementById("container");
   container.innerHTML = "";
@@ -43,7 +43,7 @@ async function getFindByIdProduct() {
 async function getFindByTitleProduct() {
   var input = document.getElementById("titleFilter");
   var title = input.value.trim();
-  let response = await fetch("http://localhost:3000/products?title=" + title);
+  let response = await fetch(urlProducts + "?title=" + title);
   let products = await response.json();
   var container = document.getElementById("container");
   container.innerHTML = "";
@@ -56,7 +56,7 @@ async function getFindByTitleProduct() {
 async function getFindByPriceProduct() {
   var input = document.getElementById("priceFilter");
   var price = input.value.trim();
-  let response = await fetch("http://localhost:3000/products?price=" + price);
+  let response = await fetch(urlProducts + "?price=" + price);
   let products = await response.json();
   var container = document.getElementById("container");
   container.innerHTML = "";
@@ -74,7 +74,7 @@ function registerProduct() {
   const title = document.getElementById("nameRegister").value;
   const price = document.getElementById("priceRegister").value;
 
-  fetch("http://localhost:3000/products", {
+  fetch(urlProducts, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -121,7 +121,7 @@ function tableLoad(product) {
 
 async function deleteProduct(event, id) {
   event.preventDefault();
-  let response = await fetch("http://localhost:3000/products/" + id, {
+  let response = await fetch(urlProducts + "/" + id, {
     method: "DELETE",
   });
 
@@ -134,7 +134,7 @@ async function deleteProduct(event, id) {
 
 function loadUpdateData(id) {
   // Fetch product data and populate the update form
-  fetch("http://localhost:3000/products/" + id)
+  fetch(urlProducts + "/" + id)
     .then(response => response.json())
     .then(product => {
       document.getElementById("idUpdate").value = product.id;
@@ -150,7 +150,7 @@ async function updateProduct(event) {
   const title = document.getElementById("nameUpdate").value;
   const price = document.getElementById("priceUpdate").value;
 
-  const response = await fetch("http://localhost:3000/products/" + id, {
+  const response = await fetch(urlProducts + "/" + id, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -173,7 +173,7 @@ async function registerProduct() {
   const title = document.getElementById("nameRegister").value;
   const price = document.getElementById("priceRegister").value;
 
-  const response = await fetch("http://localhost:3000/products", {
+  const response = await fetch(urlProducts, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
