@@ -58,7 +58,7 @@ async function getFindProduct(event) {
     });
   }
   input.value = "";
-  select.value = "";
+  document.getElementById("selectFilter").selectedIndex = 0;
 }
 
 function registerProduct() {
