@@ -1,5 +1,6 @@
 let urlProducts = "http://localhost:3000/products";
 
+
 async function getAllProducts() {
   let headersList = {
     "Accept": "*/*",
@@ -22,42 +23,42 @@ async function getAllProducts() {
 
 
 }
+async function getFindProduct(event) {
+  event.preventDefault();
+  var input = document.getElementById("searchProductInput");
+  var search = input.value.trim();
+  var select = document.getElementById("selectFilter").value;
+  let response;
+  switch (select) {
+    case "id":
+      response = await fetch(urlProducts + "/" + search);
+      break;
+    case "name":
+      response = await fetch(urlProducts + "?title=" + search);
+      break;
+    case "price":
+      let min = Number(search);
+      let max = min + 0.99;
 
-async function getFindByIdProduct() {
-  var input = document.getElementById("idFilter");
-  var id = input.value.trim();
-  let response = await fetch(urlProducts + "/" + id);
-  let product = await response.json();
-  var container = document.getElementById("container");
-  container.innerHTML = "";
-  tableLoad(product);
-  input.value = "";
-}
-
-async function getFindByTitleProduct() {
-  var input = document.getElementById("titleFilter");
-  var title = input.value.trim();
-  let response = await fetch(urlProducts + "?title=" + title);
+      response = await fetch(urlProducts + "?price_gte=" + min + "&price_lte=" + max);
+      break;
+    default:
+      alert("Select a filter");
+      return;
+  }
   let products = await response.json();
   var container = document.getElementById("container");
   container.innerHTML = "";
-  products.forEach(product => {
-    tableLoad(product);
-  });
+  if (!Array.isArray(products)) {
+    tableLoad(products);
+    console.log(products);
+  } else {
+    products.forEach(product => {
+      tableLoad(product);
+    });
+  }
   input.value = "";
-}
-
-async function getFindByPriceProduct() {
-  var input = document.getElementById("priceFilter");
-  var price = input.value.trim();
-  let response = await fetch(urlProducts + "?price=" + price);
-  let products = await response.json();
-  var container = document.getElementById("container");
-  container.innerHTML = "";
-  products.forEach(product => {
-    tableLoad(product);
-  });
-  input.value = "";
+  select.value = "";
 }
 
 function registerProduct() {
@@ -74,7 +75,7 @@ function registerProduct() {
     .then(response => response.json())
     .then(data => {
       console.log("Product registered:", data);
-      getAllProducts(); 
+      getAllProducts();
       const modal = bootstrap.Modal.getInstance(document.getElementById('RegisterModal'));
       modal.hide();
     })
@@ -109,7 +110,7 @@ async function deleteProduct(event, id) {
 
   console.log("Product " + id + " deleted");
 
-  container.innerHTML='';
+  container.innerHTML = '';
   getAllProducts();
 };
 
@@ -141,7 +142,7 @@ async function updateProduct(event) {
 
   if (response.ok) {
     console.log("Product updated successfully");
-    getAllProducts(); 
+    getAllProducts();
     const modal = bootstrap.Modal.getInstance(document.getElementById('UpdateModal'));
     modal.hide();
   } else {
@@ -163,7 +164,7 @@ async function registerProduct() {
 
   if (response.ok) {
     console.log("Product registered successfully");
-    getAllProducts(); 
+    getAllProducts();
     document.getElementById("nameRegister").value = "";
     document.getElementById("priceRegister").value = "";
     const modal = bootstrap.Modal.getInstance(document.getElementById('RegisterModal'));
