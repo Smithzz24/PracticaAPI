@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Product List</h1>
+
+        <form action="">
+            <div class="row g-2">
+                <div class="col-5">
+                    <input type="text" id="searchProductInput" class="form-control" placeholder="Search product">
+                </div>
+
+                <div class="col-2">
+                    <select class="form-select" id="selectFilter" onchange="getFindProduct(event)">
+                        <option value="" selected disabled hidden>Search By</option>
+                        <option value="id">Id</option>
+                        <option value="name">Name</option>
+                        <option value="price">Price</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+
+        <br>
+
+        <button class="btn btn-success" onclick="getAllProducts()">View products</button>
+
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#RegisterModal">
+            Add product
+        </button>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody id="container"></tbody>
+        </table>
+
+        <!-- Register Modal -->
+        <div class="modal fade" id="RegisterModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Registration Form</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="registerProduct">
+                            <input id="nameRegister" type="text" class="form-control" placeholder="Product Name"> <br>
+                            <input id="priceRegister" type="text" class="form-control" placeholder="Product Price">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="registerProduct()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Update Modal -->
+        <div class="modal fade" id="UpdateModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Update Form</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="updateProduct">
+                            <input id="idUpdate" type="hidden">
+                            <input id="nameUpdate" type="text" class="form-control" placeholder="Product Name"> <br>
+                            <input id="priceUpdate" type="text" class="form-control" placeholder="Product Price">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="updateProduct(event)">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/js/products.js"></script>
+</body>
+
+</html>

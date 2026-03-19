@@ -1,0 +1,109 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== BODY ===== */
+body {
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+    margin-top: 40px;
+}
+
+/* ===== TITLES ===== */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* ===== INDEX (MENU) ===== */
+.menu {
+    display: grid;
+    grid-template-columns: repeat(2, 150px);
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* ===== CARDS ===== */
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    background: #1e293b;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.card:hover {
+    background: #38bdf8;
+    color: black;
+}
+
+/* ===== FORMS ===== */
+.form-control,
+.form-select {
+    background: #1e293b;
+    color: white;
+    border: none;
+}
+
+.form-control::placeholder {
+    color: #94a3b8;
+}
+
+/* ===== BUTTONS ===== */
+.btn-success {
+    background: #38bdf8;
+    border: none;
+    color: black;
+}
+
+.btn-secondary {
+    background: #1e293b;
+    border: none;
+    color: white;
+}
+
+/* ===== TABLE ===== */
+.table {
+    margin-top: 20px;
+    color: white;
+}
+
+.table thead {
+    background: #1e293b;
+}
+
+.table tbody tr {
+    background: #020617;
+}
+
+/* ===== MODALS ===== */
+.modal-content {
+    background: #1e293b;
+    color: white;
+}
+
+.btn-close {
+    filter: invert(1);
+}
+
+/* ===== OPTIONAL: CENTER ONLY WHEN NEEDED ===== */
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
